@@ -19,24 +19,24 @@
   <div class="header">
     <!-- if use v-on:keyup button null, else v-on:keypress using button -->
   <input type="text" placeholder="Search.." v-model="query" @keyup="search()">
-  <div class="content">
-    <div class="first">
-      <h1>{{ result.Title }}<span class="imdb">{{ result.imdbRating }}</span></h1>
-      <button @click="show = !show">Show Description</button>
-      <p v-if="show">{{ result.Plot }}</p>
+    <div class="content">
+      <div class="col">
+        <h1>{{ result.Title }}<span class="imdb">{{ result.imdbRating }}</span></h1>
+        <button @click="show = !show">Show Description</button>
+        <p v-if="show">{{ result.Plot }}</p>
+      </div>
+      <div class="col">
+        <img :src="result.Poster" alt="">
+      </div>
+      <div class="col"> 
+      <ul>
+        <li><h3>{{ result.Genre }}</h3></li>
+        <li>{{ result.Released }}</li>
+        <li>{{ result.Actors }}</li>
+      </ul>
+     </div>
     </div>
-    <div class="center">
-      <img :src="result.Poster" alt="">
-    </div>
-    <div class="last"> 
-    <ul>
-      <li><h3>{{ result.Genre }}</h3></li>
-      <li>{{ result.Released }}</li>
-      <li>{{ result.Actors }}</li>
-    </ul>
   </div>
-  </div>
- </div>
 </div>
 
     <script>

@@ -1,0 +1,15 @@
+{
+  "name": "vue-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass style.sass style.css -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node": "^13.5.0",
+    "node-sass": "^4.13.0"
+  }
+}
