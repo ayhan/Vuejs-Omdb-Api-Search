@@ -22,20 +22,21 @@
   <div class="content">
     <div class="first">
       <h1>{{ result.Title }}<span class="imdb">{{ result.imdbRating }}</span></h1>
-      <p>{{ result.Plot }}</p>
+      <button @click="show = !show">Show Description</button>
+      <p v-if="show">{{ result.Plot }}</p>
     </div>
     <div class="center">
       <img :src="result.Poster" alt="">
     </div>
     <div class="last"> 
     <ul>
-      <li>{{ result.Genre }}</li>
+      <li><h3>{{ result.Genre }}</h3></li>
       <li>{{ result.Released }}</li>
       <li>{{ result.Actors }}</li>
     </ul>
   </div>
   </div>
-</div>
+ </div>
 </div>
 
     <script>
@@ -43,14 +44,15 @@
   el: '#app',
   data: {
     query: "",
-    result: ""
+    result: "",
+    show: false
   },
   methods: {
     search: function(){
       fetch(`http://www.omdbapi.com/?t=${this.query}&apikey=e0215254`)
       .then(result => result.json())
       .then(result => {
-        this.$set(this, 'result', result)
+        this.result = result
       })
     }
   }
