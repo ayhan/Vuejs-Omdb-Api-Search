@@ -21,19 +21,22 @@
   <input type="text" placeholder="Search.." v-model="query" @keyup="search()">
     <div class="content">
       <div class="col">
-        <h1>{{ result.Title }}<span class="imdb">{{ result.imdbRating }}</span></h1>
-        <button @click="show = !show">Show Description</button>
-        <p v-if="show">{{ result.Plot }}</p>
-      </div>
-      <div class="col">
+        <h1 class="mb-5">{{ result.Title }}<span class="yellow"> {{ result.imdbRating }}</span></h1>
         <img :src="result.Poster" alt="">
       </div>
+      <div class="col">
+        <ul>
+          <li><h3>{{ result.Genre }}</h3></li>
+          <li>{{ result.Released }}</li>
+          <li>{{ result.Actors }}</li>
+        </ul>
+        <button class="btn" @click="show = !show">Show Description</button>
+      </div>
       <div class="col"> 
-      <ul>
-        <li><h3>{{ result.Genre }}</h3></li>
-        <li>{{ result.Released }}</li>
-        <li>{{ result.Actors }}</li>
-      </ul>
+      <div class="description" v-for="( value , title ) in result">
+          <h4 v-if="show" class="yellow">{{ title }}:</h4>
+          <span v-if="show">{{ value }}</span>
+      </div>
      </div>
     </div>
   </div>
