@@ -3,6 +3,25 @@
   margin: 0;
   padding: 0; }
 
+.yellow {
+  color: #F5C518; }
+
+.mb-5 {
+  margin-bottom: 10px; }
+
+.btn {
+  width: 150px;
+  height: 50px;
+  background-color: #F5C518;
+  color: #333;
+  border-radius: 55px;
+  outline: none;
+  transition: .4s; }
+  .btn:hover {
+    color: #F5C518;
+    background-color: #333;
+    cursor: pointer; }
+
 .header {
   background-color: #000;
   height: 50px;
@@ -18,18 +37,21 @@
   .header .content {
     width: 99%;
     display: flex;
+    margin: auto 0;
     box-sizing: border-box;
     margin: 100px auto; }
     .header .content .col {
       width: 33%;
       margin-bottom: 10px; }
-      .header .content .col .imdb {
-        color: red; }
+      .header .content .col:nth-child(2) {
+        margin-top: 250px; }
+      .header .content .col .description {
+        display: flex;
+        flex-wrap: wrap; }
       .header .content .col ul li {
         list-style-type: none; }
 
 @media (max-width: 850px) {
   .content {
     flex-direction: column;
-    align-items: center;
-    justify-content: center; } }
+    align-items: center; } }
