@@ -17,9 +17,11 @@
 
 <div id="app">
   <div class="header">
-    <!-- if use v-on:keyup button null, else v-on:keypress using button -->
   <input type="text" placeholder="Search.." v-model="query" @keyup="search()">
     <div class="content">
+    <ul v-for="film in result">
+      <li>{{ film.title }}</li>
+    </ul>
       <div class="col">
         <h1 class="mb-5">{{ result.Title }}<span class="yellow"> {{ result.imdbRating }}</span></h1>
         <img :src="result.Poster" alt="">
@@ -30,7 +32,7 @@
           <li>{{ result.Released }}</li>
           <li>{{ result.Actors }}</li>
         </ul>
-        <button class="btn" @click="show = !show">Show Description</button>
+        <button v-if="query" class="btn" @click="show = !show">Show Description</button>
       </div>
       <div class="col"> 
       <div class="description" v-for="( value , title ) in result">
@@ -48,7 +50,9 @@
   data: {
     query: "",
     result: "",
-    show: false
+    show: false,
+    randomFilm: null,
+    films: null
   },
   methods: {
     search: function(){
@@ -57,7 +61,18 @@
       .then(result => {
         this.result = result
       })
+    },
+    top10: function(){
+      this.randomFilm = `000000${(Math.floor(Math.random()*10) + 1)}`
+      fetch(`http://www.omdbapi.com/?i=tt${this.randomFilm}&apikey=e0215254`)
+      .then(randomFilm => randomFilm.json())
+      .then(randomFilm => {
+        this.result = randomFilm
+      })
     }
+  },
+  created(){
+    this.top10()
   }
 })
     </script>
