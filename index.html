@@ -15,12 +15,6 @@
   <div class="header">
   <input type="text" placeholder="Search.." v-model="query" @keyup="search()">
     <div class="content">
-      <ul v-show="!query" v-for="film in result">
-        <li>{{ film.Title }}</li>
-        <li>{{ film.Genre }}</li>
-        <li><img :src="result.Poster" alt=""></li>
-        <img :src="result.Poster" alt="">
-      </ul>
       <div class="col">
         <h1 class="mb-5">{{ result.Title }}<span class="yellow"> {{ result.imdbRating }}</span></h1>
         <img :src="result.Poster" alt="">
@@ -31,15 +25,21 @@
           <li>{{ result.Released }}</li>
           <li>{{ result.Actors }}</li>
         </ul>
-        <button v-if="query" class="btn" @click="show = !show">Show Description</button>
+        <div class="created">
+          <span class="yellow"><h1 v-if="!query">Random Film</h1></span>
+          <ul v-for="film in result">
+            <h2 class="mb-5">{{ film.Title }}<span class="yellow"> {{ film.imdbRating }}</span></h2>
+            <li><img :src="film.Poster" alt=""></li>
+          </ul>
+        </div>
       </div>
       <div class="col"> 
+        <button v-if="query" class="btn" @click="show = !show">Show Description</button>
       <div class="description" v-for="( value , title ) in result">
           <h4 v-if="show" class="yellow">{{ title }}:</h4>
           <span v-if="show">{{ value }}</span>
       </div>
      </div>
-
     </div>
   </div>
 </div>
@@ -64,7 +64,7 @@
     },
     top10: function(){
       for (var i = 0; i <= 10; i++) {
-        this.randomFilm = `000000${(Math.floor(Math.random()*10) + 1)}`
+        this.randomFilm = `00${(Math.floor(Math.random()*100000) + 1)}`
       fetch(`http://www.omdbapi.com/?i=tt${this.randomFilm}&apikey=e0215254`)
       .then(randomFilm => randomFilm.json())
       .then(randomFilm => {

@@ -43,6 +43,9 @@
     .header .content .col {
       width: 33%;
       margin-bottom: 10px; }
+      .header .content .col .created {
+        position: absolute;
+        top: 80px; }
       .header .content .col:nth-child(2) {
         margin-top: 250px; }
       .header .content .col .description {
