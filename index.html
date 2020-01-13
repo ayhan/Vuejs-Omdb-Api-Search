@@ -7,10 +7,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <style>
-      
-     
-    </style>
 </head>
 <body>
 
@@ -19,9 +15,12 @@
   <div class="header">
   <input type="text" placeholder="Search.." v-model="query" @keyup="search()">
     <div class="content">
-    <ul v-for="film in result">
-      <li>{{ film.title }}</li>
-    </ul>
+      <ul v-show="!query" v-for="film in result">
+        <li>{{ film.Title }}</li>
+        <li>{{ film.Genre }}</li>
+        <li><img :src="result.Poster" alt=""></li>
+        <img :src="result.Poster" alt="">
+      </ul>
       <div class="col">
         <h1 class="mb-5">{{ result.Title }}<span class="yellow"> {{ result.imdbRating }}</span></h1>
         <img :src="result.Poster" alt="">
@@ -40,6 +39,7 @@
           <span v-if="show">{{ value }}</span>
       </div>
      </div>
+
     </div>
   </div>
 </div>
@@ -49,7 +49,7 @@
   el: '#app',
   data: {
     query: "",
-    result: "",
+    result: [],
     show: false,
     randomFilm: null,
     films: null
@@ -63,14 +63,17 @@
       })
     },
     top10: function(){
-      this.randomFilm = `000000${(Math.floor(Math.random()*10) + 1)}`
+      for (var i = 0; i <= 10; i++) {
+        this.randomFilm = `000000${(Math.floor(Math.random()*10) + 1)}`
       fetch(`http://www.omdbapi.com/?i=tt${this.randomFilm}&apikey=e0215254`)
       .then(randomFilm => randomFilm.json())
       .then(randomFilm => {
-        this.result = randomFilm
+        this.result.push(randomFilm)
+        console.log(randomFilm)
       })
+     }
     }
-  },
+  }, 
   created(){
     this.top10()
   }

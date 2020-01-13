@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "node": "^13.5.0",
     "node-sass": "^4.13.0",
     "vue": "^2.6.11"
